@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css" />
+<script type="text/javascript" src="../adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="../ext-all.js"></script>
+<script>
+	Ext.onReady(function(){
+    var data=[
+              {name:'<$100',ot:33.33},
+              {name:'$100-500',ot:44.87},
+              {name:'$500-1000',ot:11.54},
+              {name:'$1000-5000',ot:9.62},
+              {name:'$5000-1000',ot:0.64}
+			  //{name:'和八',ot:77}
+               ];
+    var store=Ext.create('Ext.data.Store',{
+        fields:['name','ot'],
+        autoLoad:true,
+        proxy:'memory',
+        data:data
+        });
+	//store.loadData(data(6, 20));
+     var chart3=Ext.create('Ext.chart.Chart',{
+          renderTo:Ext.getBody(),
+		  xtype: 'piechart',
+          animate:true,
+          store:store,
+		  layout: 'fit',
+          width:500,
+          height:400,
+		  shadow: true,
+          legend: {
+            position: 'right'        //定位
+          },
+		  insetPadding: 30,
+		  highlightDuration: 200,
+		  theme: 'Base:gradients',
+          series: [{
+		    type:'pie',   //统计图的类型
+			field:'ot',   //根据ot字段来分扇区的大小
+			showInLegend: true,
+			//colorSet: ['#4EEE94','#63B8FF','#836FFF','#8A2BE2','#7FFF00','#FF0000'],
+			label: {
+                field: 'name',    //扇区里显示的字段
+                display: 'rotate',
+                contrast: true,
+                font: '12px Arial'
+            },
+			tips: {
+			   trackMouse: true,
+			   width:140,
+			   height:28,
+			   renderer: function(storeItem, item) {
+			       var total = 0;
+				   store.each(function(rec) {
+				       total += rec.get('ot');
+				   });
+				   this.setTitle(storeItem.get('name') + ':' + Math.round(storeItem.get('ot') /total * 100) + '%');
+			   }
+			},  //tip结束
+			highlight:{
+             segment:{
+                margin:20  //扇区的margin
+              }
+            },
+			donut: 40
+        }]
+    })
+
+    });
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
+</body>
+</html>

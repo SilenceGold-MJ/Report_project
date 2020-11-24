@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- qtcore-index.qdoc -->
+    <title>南水北调机器人项目</title>
+    <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+    <link rel="stylesheet" type="text/css" href="style/tablell_6.css" />
+
+    <script type="text/javascript">
+        document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");
+        // loading style sheet breaks anchors that were jumped to before
+        // so force jumping to anchor again
+        setTimeout(function () {
+            var anchor = location.hash;
+            // need to jump to different anchor first (e.g. none)
+            location.hash = "#";
+            setTimeout(function () {
+                location.hash = anchor;
+            }, 0);
+        }, 0);
+    </script>
+</head>
+<body>
+    <div class="header" id="qtdocheader">
+        <div class="main">
+            <div class="main-rounded">
+                <div class="navigationbar">
+                    <table>
+                        <tr>
+                            <td><a href="">南水北调机器人项目</a></td>
+                            <td>模拟动态采集图像测试报告</td>
+                        </tr>
+                    </table>
+                    <table class="buildversion">
+                        <tr>
+                            <td id="buildversion" width="100%" align="right"><a href="#">南水北调机器人项目</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content">
+                <div class="line">
+                    <div class="content mainContent">
+                        <div class="sidebar">
+                            <div class="toc">
+                                <h3><a name="toc">目录</a></h3>
+                                <ul>
+                                    <li class="level1"><a href="#functiondetection_summary">1.	测试目的</a></li>
+									<li class="level1"><a href="#functiondetection_my">2.	测试参数</a></li>
+									<li class="level1"><a href="#functiondetection_user">3.	采集情况</a></li>
+									<li class="level1"><a href="#functiondetecsdtion_summary">4.	测试结论</a></li>
+
+
+
+
+
+                                </ul>
+                            </div>
+                            <div class="sidebar-content" id="sidebar-content"></div>
+                        </div>
+                        <h1 class="title">南水北调机器人项目</h1>
+                        <span class="subtitle"></span>
+                        <!-- $$$qtcore-index.html-description -->
+                        <div class="descr">
+
+                            <h2 id="functiondetection_summary">1.	测试目的</h2>
+                            <p>模拟人推行速度3 km/h（每秒走一步，一步0.83m），在半径为1m的管道中相机相对墙面以45.216 km/h（每秒相机在滑环上转两圈）速度运行，查看动态采集图像是否清晰。</p>
+				                            <ul>
+
+                                <li>相机型号：GO-2400M-PGE</li>
+								 <li>测试日期：2020-11-2</li>
+								  <li>测试日期：2020-11-2</li>
+
+                            </ul>
+							                            <h2 id="functiondetection_my">2.	测试参数</h2>
+                            <p>转盘转速10r/s；转盘最外圈半径0.2m；计算得出最外圈线速度为45.216km/h。</p>
+				                            <ul>
+
+								<a href="images/IMG_20201102_150036R.jpg"><img id="u2_img" class="img " src="images/IMG_20201102_150036R.jpg"/></a>
+								<a href="images/IMG_20201102_150029R.jpg"><img id="u2_img" class="img " src="images/IMG_20201102_150029R.jpg"/></a>
+
+                            </ul>
+
+
+							<h2 id="functiondetection_user">3.	采集情况</h2>
+                            <p>光圈1.4，分别设置曝光时间为30us、50us、80us、100us下测试采集图像情况。</p>
+
+
+<table class=table11_6>
+    <tr>
+        <th>曝光时间</th><th>照片</th></tr>
+
+    <tr>
+        <td>30us</td><td><a href="images/2020-11-02_14-55-12.754_30.bmp"><img id="u2_img" class="img " src="images/2020-11-02_14-55-12.754_30.bmp"/></a></td>
+    </tr>
+    <tr>
+        <td>50us</td><td><a href="images/2020-11-02_14-58-08.081_50.bmp"><img id="u2_img" class="img " src="images/2020-11-02_14-58-08.081_50.bmp"/></a></td>
+    </tr>
+    <tr>
+        <td>80us</td><td><a href="images/2020-11-02_14-50-22.846_80.bmp"><img id="u2_img" class="img " src="images/2020-11-02_14-50-22.846_80.bmp"/></a></td>
+    </tr>
+    <tr>
+        <td>100us</td><td><a href="images/2020-11-02_12-20-03.273_100.bmp"><img id="u2_img" class="img " src="images/2020-11-02_12-20-03.273_100.bmp"/></a></td>
+    </tr>
+</table>
+
+<p>更多图片地址（内网）：<a href="file:\\192.168.1.55\\共享文件\\南水北调机器人项目\\模拟动态采集">\\192.168.1.55\共享文件\南水北调机器人项目\模拟动态采集</a>。</p>
+
+ <h2 id="functiondetecsdtion_summary">4.	测试结论</h2>
+
+                            <p>本次测试在相对相机运动45.216km/h时，相机曝光时间在30~100us均能采集到清晰的图像；在本次配备的光源下，相机曝光时间在80us和100us亮度下采集图像亮度正合适，50us和30us偏暗。</p>
+
+                        </div>
+                        <!-- @@@qtcore-index.html -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>
+            <a href="http://www.hllok.com/lianxiwomen.jsp" target="_blank">联系我们</a> |
+            <a href="http://www.hllok.com/index.jsp" target="_blank">常见问题</a> |
+            <a href="http://bbs.hllok.com/forum-4-1.html" target="_blank">意见反馈</a> |
+            <a href="http://www.hllok.com" target="_blank">友情链接</a>
+        </p>
+        <p>
+            Copyright © 2008-2020
+            <a href="//www.hllok.com" target="_blank">Hllok.com</a> All Rights Reserved 西安火眼智能检测研究院有限公司
+        </p>
+        <p>中国(陕西)西安高新区科技路旺座国际城C座1101室</p>
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备14009079号-1</a></p>
+        <p><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51019002000701" target="_blank">陕公网安备&nbsp;51019002000701号</a></p>
+    </div>
+</body>
+</html>

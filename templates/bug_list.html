@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- qtcore-index.qdoc -->
+    <title>{{ head }}</title>
+    <link rel="stylesheet" type="text/css" href="../static/style/offline-simple.css" />
+<link rel="stylesheet" type="text/css" href="../static/style/tablell_6.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/shurukuang.css">
+
+    <script type="text/javascript">
+        document.getElementsByTagName("link").item(0).setAttribute("href", "../static/style/offline.css");
+        // loading style sheet breaks anchors that were jumped to before
+        // so force jumping to anchor again
+        setTimeout(function () {
+            var anchor = location.hash;
+            // need to jump to different anchor first (e.g. none)
+            location.hash = "#";
+            setTimeout(function () {
+                location.hash = anchor;
+            }, 0);
+        }, 0);
+    </script>
+</head>
+<body>
+    <div class="header" id="qtdocheader">
+        <div class="main">
+            <div class="main-rounded">
+                <div class="navigationbar">
+                    <table>
+                        <tr>
+                            <td><a href="{{ head_addr }}">首页</a></td>
+                            <td>{{ head }}</td>
+                        </tr>
+                    </table>
+                    <table class="buildversion">
+                        <tr>
+                            <td id="buildversion" width="100%" align="right"><a href="{{ head_addr }}">首页</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content">
+                <div class="line">
+                    <div class="content mainContent">
+                        <div class="sidebar">
+                                                        <div class="toc">
+                                <h3><a name="toc">目录</a></h3>
+                                <ul>
+
+                                    <li class="level1"><a href="#functiondetection_summary_1">1.	模块简报</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_2">2.	未关闭BUG列表</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_3">3.	所有BUG等级占比</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_4">4.	最近七日增量</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_5">5.	全周期BUG日增量</a></li>
+
+
+                                </ul>
+                            </div>
+
+                            <div class="sidebar-content" id="sidebar-content"></div>
+                        </div>
+                        <h1 class="title">{{head}}</h1>
+                        <span class="subtitle"></span>
+                        <!-- $$$qtcore-index.html-description -->
+                        <div class="descr">
+
+                        <h2 id="functiondetection_summary_1">1.	模块简报</h2>
+                         <ul>
+                         <p>{{ synopsis }}</p>
+{#                         <p>{{ product }}项目的{{ data_product_sum.name}}模块，已提交{{ data_product_sum.sum_all }}个BUG，当前已修复解决{{data_product_sum.data.closed  }}个BUG，{{data_product_sum.data.active  }}个BUG待解决，{{data_product_sum.data.resolved  }}个BUG待验证；有{{ severity_NOclosed_1_2_sum }}个严重级别以上BUG需要优先处理。</p>#}
+                           <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{progress_chart_html}}" width="100%" height="530" >    </object>
+                            <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{module_sum_html}}" width="100%" height="530" >    </object>
+                             <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{severity_NOclosed_html}}" width="100%" height="530" > </object>
+
+{#                          <p>{{ head}}，以下BUG需要优先处理（严重级以上）：（{{ zentao_zm }}）</p>#}
+                         <P>{{ need_settle }}</P>
+
+
+
+                                   <table class=table11_6>
+
+
+                                    <tr>
+      {% for key in entry_name_lies %}
+        <th>{{ key }}</th>
+        {% endfor %}
+      {% for key in operation %}
+        <th>{{ key }}</th>
+        {% endfor %}
+  </tr>
+  <tr>
+              {% for i in Importance_level_data_list.data %}
+			<tr>
+            {% for key,value in i.items %}
+                <td>{{ value }}</td>
+                             {% endfor %}
+{#             <td><a href="/{{path_url}}/?module={{ i.module }}&Modulename={{ i.Modulename }}">详情</a></td>#}
+                        <td><a href="http://{{zentao_url }}/zentao/bug-view-{{ i.id }}.html">详情</a></td>
+{#            <td><a href="http://{{ zentao_url }}/zentao/bug-view-{{ i.id }}.html">详情</a></td>#}
+
+                </tr>
+
+    {% endfor %}
+  </tr>
+
+</table>
+
+
+
+
+
+
+                         </ul>
+
+                            <h2 id="functiondetection_summary_2">2.	未关闭BUG列表</h2>
+
+                            <ul>
+
+                            <li class="level1"><p>{{ zentao_zm }}</p></li>
+
+                                                                <table class=table11_6>
+  <tr>
+      {% for key in entry_name_lies %}
+        <th>{{ key }}</th>
+        {% endfor %}
+      {% for key in operation %}
+        <th>{{ key }}</th>
+        {% endfor %}
+  </tr>
+  <tr>
+              {% for i in bug_list %}
+			<tr>
+            {% for key,value in i.items %}
+                <td>{{ value }}</td>
+                             {% endfor %}
+{#             <td><a href="/{{path_url}}?module={{ i.module }}&Modulename={{ i.Modulename }}">详情</a></td>#}
+            <td><a href="http://{{ zentao_url }}/zentao/bug-view-{{ i.id }}.html">详情</a></td>
+
+                </tr>
+
+    {% endfor %}
+  </tr>
+
+</table>
+                            </ul>
+
+                            <h2 id="functiondetection_summary_3">3.	所有BUG等级占比</h2>
+
+                            <ul>
+                  <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{severity_all_html}}" width="100%" height="530" >    </object>
+                                </ul>
+
+
+                          <h2 id="functiondetection_summary_4">4.	最近七日增量</h2>
+
+
+                            <ul>
+                   <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{dic_txt_BUG_rz_data}}" width="100%" height="530" >    </object>
+                                </ul>
+                        <h2 id="functiondetection_summary_5">5.	全周期BUG日增量</h2>
+                            <ul>
+
+                                 <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{dic_all_bug_data}}" width="100%" height="530" >    </object>
+
+
+                            </ul>
+
+
+
+
+                        </div>
+                        <!-- @@@qtcore-index.html -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>
+            <a href="http://www.hllok.com/lianxiwomen.jsp" target="_blank">联系我们</a> |
+            <a href="http://www.hllok.com/index.jsp" target="_blank">常见问题</a> |
+            <a href="http://bbs.hllok.com/forum-4-1.html" target="_blank">意见反馈</a> |
+            <a href="http://www.hllok.com" target="_blank">友情链接</a>
+        </p>
+        <p>
+            Copyright © 2008-2020
+            <a href="//www.hllok.com" target="_blank">Hllok.com</a> All Rights Reserved 西安火眼智能检测研究院有限公司
+        </p>
+        <p>中国(陕西)西安高新区科技路旺座国际城C座1101室</p>
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备14009079号-1</a></p>
+        <p><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51019002000701" target="_blank">陕公网安备&nbsp;51019002000701号</a></p>
+    </div>
+</body>
+</html>

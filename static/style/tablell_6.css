@@ -1,0 +1,29 @@
+    .table11_6 table {
+        width:100%;
+        margin:15px 0;
+        border:0;
+    }
+    .table11_6 th {
+        background-color: rgba(200, 200, 200, 0.39);
+        color: rgb(0, 0, 0)
+    }
+    .table11_6,.table11_6 th,.table11_6 td {
+        font-size:0.95em;
+        text-align:center;
+        padding:4px;
+        border-collapse:collapse;
+    }
+    .table11_6 th,.table11_6 td {
+        border: 1px solid rgba(86, 100, 117, 0.15);
+        border-width:1px 0 1px 0;
+        border:2px inset #ffffff;
+    }
+    .table11_6 tr {
+        border: 1px solid #ffffff;
+    }
+    .table11_6 tr:nth-child(odd){
+        background-color:#ffffff;
+    }
+    .table11_6 tr:nth-child(even){
+        background-color:#ffffff;
+    }

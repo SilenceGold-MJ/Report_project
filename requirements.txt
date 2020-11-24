@@ -1,0 +1,4 @@
+Django==3.0.7
+requests==2.22.0
+pyecharts==1.7.1
+pandas==0.25.3
