@@ -27,6 +27,8 @@ def index(request):#request是必须带的实例。类似class下方法必须带
 
 
     data = API().APIall('get_All_projects', {})
+    projects_list=data["Repair_rate_sorted"]
+    projects_list.reverse()#列表反向输出
 
     logger.info(data)
     ########################################生成扇形统计图
@@ -53,7 +55,7 @@ def index(request):#request是必须带的实例。类似class下方法必须带
 
     entry_name_lies=zentao_list()['pro_list']
     return render(request, "index.html", {
-                                        "projects_list": data["data"],
+                                        "projects_list": projects_list,
                                           "head": '',
                                           'entry_name_lies':entry_name_lies,
                                           "path_url": 'product',
@@ -74,6 +76,12 @@ def project_summary(request):#
     logger.info('入参：%s,%s'%(product,name))
     data_product_sum=API().APIall('get_product_sum', dic)
     data = API().APIall('module_info', dic)
+
+    module_bug_list=data['Repair_datalists_sorted']
+    module_bug_list.reverse()#列表倒序输出
+
+
+
     entry_name_lies = zentao_list()['module_list']
 
 
@@ -274,7 +282,7 @@ def project_summary(request):#
                   {
                    'synopsis':synopsis,
                    'head_addr':head_addr,
-                   "module_list": data['Repair_datalists_sorted'],
+                   "module_list": module_bug_list,
                    'data_product_sum':data_product_sum['data'],
                    "head": name,
                    'entry_name_lies': entry_name_lies,

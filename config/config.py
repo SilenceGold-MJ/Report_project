@@ -1,12 +1,12 @@
 ﻿
-def terminal_server():
+def terminal_server():#服务器地址
 	dic={
 		"host":"192.168.1.182",
 		'port':9001
 
 	}
 	return dic
-def head_server():
+def head_server():#前端访问地址
 	dic={
 		"host":"192.168.1.182",
 		'port':9002
@@ -49,9 +49,9 @@ def zentaos_zm():
 
 
 def zentao_list():
-	module_list = ['编号', '模块名称', '总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','发布建议','修复率','责任人','详情']
+	module_list = ['编号', '模块名称', '总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','修复率','责任人','发布建议','详情']
 	bug_list = ['序列', '项目', '模块', 'BUG编号', 'BUG标题', '严重程度', '优先级', 'BUG状态', '创建日期', '指派给', '由谁创建', '详情']
-	pro_list = ['序列', '编号', '项目名称', 'BUG总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','发布建议','修复率','责任人','详情']
+	pro_list = [ '编号', '项目名称', 'BUG总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','修复率','责任人','发布建议','详情']
 	return {"module_list": module_list, 'bug_list': bug_list, 'pro_list': pro_list}
 
 def product_lusion(dic):
@@ -69,8 +69,8 @@ def product_lusion(dic):
 	# }
 
 	lusion={
-		'brief_4':'%s项目，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；有%s个较严重BUG（严重/致命）需要优先处理，解决验收完成后可发布试用版本。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_2'] + dic['severity_1']),
-		'brief_3':'%s项目，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），可发布试用版本，但仍需要对剩余%s个一般级BUG进行修复，修复完成后可发布正式版本。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
+		'brief_4':'%s项目，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；有%s个较严重BUG（严重/致命）需要优先处理。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_2'] + dic['severity_1']),
+		'brief_3':'%s项目，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），可发布试用版本，但仍需要对剩余%s个一般级BUG进行修复。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
 		'brief_2':'%s项目，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；暂无一般级（一般/严重/致命）以上BUG，可发布正式版本，剩余%s个轻微级BUG可在后续版本迭代中处理。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_4'] ),
 		'brief_1':'%s项目，已提交%s个BUG，已修复解决%s个BUG，所有BUG均已解决，可交付正式版本。'%(dic['product'],dic['bug_total'],dic['closed_sum']),
 		'brief_-1': '%s项目，暂未开始。' % (dic['product']),
@@ -80,8 +80,8 @@ def module_lusion(dic):
 
 
 	lusion={
-		'brief_4':'%s项目，%s模块，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；有%s个较严重BUG（严重/致命）需要优先处理，解决验收完成后可发布试用版本。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_2'] + dic['severity_1']),
-		'brief_3':'%s项目，%s模块，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），可发布试用版本，但仍需要对剩余%s个一般级BUG进行修复，修复完成后可发布正式版本。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
+		'brief_4':'%s项目，%s模块，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；有%s个较严重BUG（严重/致命）需要优先处理。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_2'] + dic['severity_1']),
+		'brief_3':'%s项目，%s模块，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），但仍需要对剩余%s个一般级BUG进行修复处理。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
 		'brief_2':'%s项目，%s模块，已提交%s个BUG，已修复解决%s个BUG；当前待解决BUG数为%s，待验证BUG数为%s；暂无一般级（一般/严重/致命）以上BUG，可发布正式版本，剩余%s个轻微级BUG可在后续版本迭代处理。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_4'] ),
 		'brief_1':'%s项目，%s模块，已提交%s个BUG，已修复解决%s个BUG；所有BUG均已解决，可交付正式版本。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum']),
 		'brief_-1': '%s项目，%s模块，暂未开始。' % (dic['product'], dic['module']),
