@@ -73,8 +73,11 @@ def project_summary(request):#
         'product': product,
         'module':''
     }
-    logger.info('入参：%s,%s'%(product,name))
+
     data_product_sum=API().APIall('get_product_sum', dic)
+    name = data_product_sum['data']['name']
+
+    logger.info('入参：%s,%s'%(product,name))
     data = API().APIall('module_info', dic)
 
     module_bug_list=data['Repair_datalists_sorted']
@@ -305,7 +308,7 @@ def project_summary(request):#
                   )
 def module(request):
     module = request.GET.get('module')
-    Modulename = request.GET.get('Modulename')
+
 
 
 
@@ -324,6 +327,7 @@ def module(request):
         "product":''
     }
     module_sum = API().APIall('get_product_sum', dic_module)
+    Modulename = module_sum['data']['name']
 
 
 
