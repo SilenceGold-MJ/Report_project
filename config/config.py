@@ -1,7 +1,7 @@
 ﻿
 def terminal_server():#服务器地址
 	dic={
-		"host":"192.168.1.55",
+		"host":"192.168.1.182",
 		'port':9001
 
 	}
@@ -70,7 +70,7 @@ def product_lusion(dic):
 
 	lusion={
 		'brief_4':'%s项目，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；有%s个较严重BUG（严重/致命）需要优先处理。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_2'] + dic['severity_1']),
-		'brief_3':'%s项目，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），剩余%s个一般级BUG进行修复。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
+		'brief_3':'%s项目，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），剩余%s个一般级BUG需要进行修复。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
 		'brief_2':'%s项目，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；暂无一般级（一般/严重/致命）以上BUG，剩余%s个轻微级BUG可在后续版本迭代中处理。'%(dic['product'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_4'] ),
 		'brief_1':'%s项目，已提交%s个BUG，已修复解决%s个BUG，所有BUG均已解决，可交付正式版本。'%(dic['product'],dic['bug_total'],dic['closed_sum']),
 		'brief_-1': '%s项目，暂未开始。' % (dic['product']),
@@ -81,7 +81,7 @@ def module_lusion(dic):
 
 	lusion={
 		'brief_4':'%s项目，%s模块，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；有%s个较严重BUG（严重/致命）需要优先处理。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_2'] + dic['severity_1']),
-		'brief_3':'%s项目，%s模块，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），剩余%s个一般级BUG进行修复处理。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
+		'brief_3':'%s项目，%s模块，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；暂无较严重问题（严重/致命），剩余%s个一般级BUG需要进行修复。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_3'] ),
 		'brief_2':'%s项目，%s模块，当前已提交%s个BUG，已修复解决%s个BUG；待解决BUG数为%s，待验证BUG数为%s；暂无一般级（一般/严重/致命）以上BUG，剩余%s个轻微级BUG可在后续版本迭代处理。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum'],dic['active_sum'],dic['resolved_sum'],dic['severity_4'] ),
 		'brief_1':'%s项目，%s模块，当前已提交%s个BUG，已修复解决%s个BUG；所有BUG均已解决，可交付正式版本。'%(dic['product'],dic['module'],dic['bug_total'],dic['closed_sum']),
 		'brief_-1': '%s项目，%s模块，暂未开始。' % (dic['product'], dic['module']),

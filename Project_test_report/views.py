@@ -373,9 +373,11 @@ def module(request):
                     'severity_3'] == 0 and data_product_module_sum['severity_4'] == 0:
             synopsis = module_lusion(data_product_module_sum)['brief_1']
             severity = ''
+            Importance_level_data_list = []
             need_settle = module_Next_step(data_product_module_sum)['brief_1']
 
         else:
+            Importance_level_data_list = []
             need_settle = module_Next_step(data_product_module_sum)['brief_1']
     else:
         synopsis=module_lusion(data_product_module_sum)['brief_-1']
@@ -496,7 +498,7 @@ def module(request):
                       'severity_NOclosed_1_2_sum':severity_NOclosed_1_2_sum,
                       'severity_NOclosed_html': severity_NOclosed_dic['htmlname'],
                       'severity_all_html': severity_all_dic['htmlname'],
-                      "Importance_level_data_list": Importance_level_data_list,
+                      "Importance_level_data_list": Importance_level_data_list,#Importance_level_data_list
                       'need_settle': need_settle,
                       'dic_txt_BUG_rz_data': dic_txt_BUG_rz_data['htmlname'],
                       'dic_all_bug_data': dic_all_bug_data['htmlname'],
