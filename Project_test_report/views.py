@@ -3,7 +3,8 @@
 from django.http import HttpResponseRedirect
 from framework.logger import Logger
 from config.config import *
-from framework.API import API
+from framework.ServiceAPI import *
+
 from framework.Fanchart import *
 from framework.Add_call import Add_call
 import time
@@ -11,10 +12,7 @@ from django.shortcuts import HttpResponse, render, redirect
 logger = Logger(logger="views").getlog()
 import configparser,os
 
-proDir = os.getcwd()
-configPath = os.path.join(proDir, "config\config.ini")
-cf = configparser.ConfigParser()
-cf.read(configPath,encoding="utf-8-sig")
+
 
 head_host=head_server()['host']
 head_port=head_server()['port']
@@ -26,7 +24,7 @@ def index(request):#request是必须带的实例。类似class下方法必须带
     #"htmlname": '%s_%s_.html' % (time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime()), Add_call().random_str(30)),
 
 
-    data = API().APIall('get_All_projects', {})
+    data =ServiceAPI().get_All_projects()
     projects_list=data["Repair_rate_sorted"]
     projects_list.reverse()#列表反向输出
 
@@ -55,6 +53,7 @@ def index(request):#request是必须带的实例。类似class下方法必须带
 
     entry_name_lies=zentao_list()['pro_list']
     return render(request, "index.html", {
+                                        'Company_info':Company_info(),
                                         "projects_list": projects_list,
                                           "head": '',
                                           'entry_name_lies':entry_name_lies,
@@ -74,11 +73,14 @@ def project_summary(request):#
         'module':''
     }
 
-    data_product_sum=API().APIall('get_product_sum', dic)
+    #data_product_sum=API().APIall('get_product_sum', dic)
+    data_product_sum = ServiceAPI().get_product_sum(dic)
+
     name = data_product_sum['data']['name']
 
     logger.info('入参：%s,%s'%(product,name))
-    data = API().APIall('module_info', dic)
+    #data = API().APIall('module_info', dic)
+    data = ServiceAPI().module_info(dic)
 
     module_bug_list=data['Repair_datalists_sorted']
     module_bug_list.reverse()#列表倒序输出
@@ -106,7 +108,8 @@ def project_summary(request):#
 
 
     def Impo_level(severity):
-        module_lsit = API().APIall('get_module', dic)["data"]
+        #module_lsit = API().APIall('get_module', dic)["data"]
+        module_lsit =ServiceAPI().get_module(dic)["data"]
         Importance_level_data_list = []
         if severity != '':
             for i in module_lsit["modulelist"]:
@@ -115,7 +118,9 @@ def project_summary(request):#
                     "module": i,
                     'severity': severity  # 'severity<=2',
                 }
-                Importance_level_data = API().APIall('Importance_level', dic_Importance_level)["data"]
+
+                #Importance_level_data = API().APIall('Importance_level', dic_Importance_level)["data"]
+                Importance_level_data = ServiceAPI().Importance_level(dic_Importance_level)["data"]
 
                 if len(Importance_level_data["data"]) != 0:
                     Importance_level_data_list.append(Importance_level_data)
@@ -128,7 +133,8 @@ def project_summary(request):#
 
     ##############################################简介语
 
-    data_product_module_sum = API().APIall('get_product_module_sum', dic)["data"]
+    #data_product_module_sum = API().APIall('get_product_module_sum', dic)["data"]
+    data_product_module_sum = ServiceAPI().get_product_module_sum(dic)["data"]
     if data_product_module_sum['bug_total']!=0:
         if data_product_module_sum['severity_1'] + data_product_module_sum['severity_2'] > 0:
             synopsis = product_lusion(data_product_module_sum)['brief_4']
@@ -207,7 +213,8 @@ def project_summary(request):#
     Fanchart(modular_sxt)
     ###################################生成模块BUG数占比扇形图
     ###############################################################生成BUG日增量条形图
-    data_time = API().APIall('Check_new_BUG', dic)
+    #data_time = API().APIall('Check_new_BUG', dic)
+    data_time = ServiceAPI().Check_new_BUG(dic)
     import datetime
     End_Time = str(data_time['End_Time'])
     dt = datetime.datetime.strptime(End_Time, "%Y-%m-%d")
@@ -219,7 +226,9 @@ def project_summary(request):#
         "StartTime": StartTime_7_day,
         "End_Time": End_Time
     }
-    txt_BUG_rz_data=API().APIall('grow_days', dic_txt_BUG_rz)
+    #txt_BUG_rz_data=API().APIall('grow_days', dic_txt_BUG_rz)
+    txt_BUG_rz_data=ServiceAPI().grow_days_zs( dic_txt_BUG_rz)
+
     dic_txt_BUG_rz_data={
             "key":txt_BUG_rz_data['days_list'],
             "values":txt_BUG_rz_data["number_zs_list"],
@@ -244,7 +253,8 @@ def project_summary(request):#
         "StartTime":  str(data_time["StartTime"]),
         "End_Time": End_Time
     }
-    txt_BUG_rz_data_all = API().APIall('grow_days', dic_txt_BUG_all_time)
+    #txt_BUG_rz_data_all = API().APIall('grow_days', dic_txt_BUG_all_time)
+    txt_BUG_rz_data_all =ServiceAPI().grow_days_zs(dic_txt_BUG_all_time)
     dic_all_bug_data = {
         "key": txt_BUG_rz_data_all['days_list'],
         "values": txt_BUG_rz_data_all["number_zs_list"],
@@ -258,7 +268,8 @@ def project_summary(request):#
 
     #####################################################BUG严重程度扇形图
 
-    severity_data_all = API().APIall('get_severity', {"product": product,"module": ""})['data']
+    #severity_data_all = API().APIall('get_severity', {"product": product,"module": ""})['data']
+    severity_data_all =ServiceAPI().get_severity({"product": product,"module": ""})['data']
     severity_all_dic={
             "key":severity_data_all['severity_all']['severity_name_all'],
               "values":severity_data_all['severity_all']['severity_sums_all'],
@@ -283,6 +294,7 @@ def project_summary(request):#
     return render(
         request, "project_summary.html",
                   {
+                   'Company_info': Company_info(),
                    'synopsis':synopsis,
                    'head_addr':head_addr,
                    "module_list": module_bug_list,
@@ -314,10 +326,12 @@ def module(request):
 
     dic = {
         'module': module,
+        'product':'',
 
     }
 
-    data = API().APIall('get_module_bug', dic)
+    #data = API().APIall('get_module_bug', dic)
+    data = ServiceAPI().get_module_bug(dic)
 
     entry_name_lies = zentao_list()['bug_list']
 
@@ -326,7 +340,8 @@ def module(request):
         'module':module,
         "product":''
     }
-    module_sum = API().APIall('get_product_sum', dic_module)
+    #module_sum = API().APIall('get_product_sum', dic_module)
+    module_sum = ServiceAPI().get_product_sum(dic_module)
     Modulename = module_sum['data']['name']
 
 
@@ -337,7 +352,8 @@ def module(request):
 
     def Impo_level(severity):
         dic_module.update({'severity': severity})
-        Importance_level_data = API().APIall('Importance_level', dic_module)["data"]
+        #Importance_level_data = API().APIall('Importance_level', dic_module)["data"]
+        Importance_level_data = ServiceAPI().Importance_level(dic_module)["data"]
 
 
         return Importance_level_data
@@ -346,7 +362,8 @@ def module(request):
 
     ##############################################简介语
 
-    data_product_module_sum = API().APIall('get_product_module_sum', dic)["data"]
+    #data_product_module_sum = API().APIall('get_product_module_sum', dic)["data"]
+    data_product_module_sum =ServiceAPI().get_product_module_sum(dic)["data"]
     product=data_product_module_sum['product']
     if data_product_module_sum['bug_total']!=0:
         if data_product_module_sum['severity_1'] + data_product_module_sum['severity_2'] > 0:
@@ -417,7 +434,8 @@ def module(request):
 
     #####################################################BUG严重程度扇形图
 
-    severity_data_all = API().APIall('get_severity', dic_module)['data']
+    #severity_data_all = API().APIall('get_severity', dic_module)['data']
+    severity_data_all =ServiceAPI().get_severity(dic_module)['data']
     severity_all_dic={
             "key":severity_data_all['severity_all']['severity_name_all'],
               "values":severity_data_all['severity_all']['severity_sums_all'],
@@ -437,7 +455,8 @@ def module(request):
     #####################################################严重程度扇形图
 
     ###############################################################生成BUG日增量条形图
-    data_time = API().APIall('Check_new_BUG', dic_module)
+    #data_time = API().APIall('Check_new_BUG', dic_module)
+    data_time =ServiceAPI().Check_new_BUG(dic_module)
     import datetime
     End_Time = str(data_time['End_Time'])
     dt = datetime.datetime.strptime(End_Time, "%Y-%m-%d")
@@ -449,7 +468,8 @@ def module(request):
         "StartTime": StartTime_7_day,
         "End_Time": End_Time
     }
-    txt_BUG_rz_data = API().APIall('grow_days', dic_txt_BUG_rz)
+    #txt_BUG_rz_data = API().APIall('grow_days', dic_txt_BUG_rz)
+    txt_BUG_rz_data = ServiceAPI().grow_days_zs(dic_txt_BUG_rz)
     dic_txt_BUG_rz_data = {
         "key": txt_BUG_rz_data['days_list'],
         "values": txt_BUG_rz_data["number_zs_list"],
@@ -474,7 +494,8 @@ def module(request):
         "StartTime": str(data_time["StartTime"]),
         "End_Time": End_Time
     }
-    txt_BUG_rz_data_all = API().APIall('grow_days', dic_txt_BUG_all_time)
+    #txt_BUG_rz_data_all = API().APIall('grow_days', dic_txt_BUG_all_time)
+    txt_BUG_rz_data_all =ServiceAPI().grow_days_zs(dic_txt_BUG_all_time)
     dic_all_bug_data = {
         "key": txt_BUG_rz_data_all['days_list'],
         "values": txt_BUG_rz_data_all["number_zs_list"],
@@ -486,6 +507,7 @@ def module(request):
     Line_chart(dic_all_bug_data)
     ##################################################生成所有BUG周期的折线图
     request_dic={
+                'Company_info': Company_info(),
                  'synopsis':synopsis,
                  'head_addr': head_addr,
                 "bug_list": data['data'],
@@ -519,7 +541,9 @@ def module_test(request):
     dic_s = {"product":product,
             "module":""
            }
-    data = API().APIall('get_product_sum', dic_s)
+    #data = API().APIall('get_product_sum', dic_s)
+    data =ServiceAPI().get_product_sum(dic_s)
+
 
 
     #######################################进度图

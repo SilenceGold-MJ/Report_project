@@ -20,6 +20,9 @@ from django.conf.urls import url
 
 
 
+
+
+
 urlpatterns = [
 path('', views.index),
 path('index', views.index),

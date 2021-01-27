@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- index.qdoc -->
-    <title>西安火眼猴智能科技研究院有限公司</title>
+    <title>{{ Company_info.comname }}</title>
     <link rel="stylesheet" type="text/css" href="../static/style/offline-simple.css" />
 <link rel="stylesheet" type="text/css" href="../static/style/tablell_6.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/shurukuang.css">
@@ -29,12 +29,12 @@
                 <div class="navigationbar">
                     <table>
                         <tr>
-                            <td>西安火眼猴智能科技研究院有限公司</td>
+                            <td>{{ Company_info.comname }}</td>
                         </tr>
                     </table>
                     <table class="buildversion">
                         <tr>
-                            <td id="buildversion" width="100%" align="right">西安火眼猴智能科技研究院有限公司</td>
+                            <td id="buildversion" width="100%" align="right">{{ Company_info.comname }}</td>
                         </tr>
                     </table>
                 </div>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="sidebar-content" id="sidebar-content"></div>
                         </div>
-                        <h1 class="title">西安火眼猴智能科技研究院有限公司</h1>
+                        <h1 class="title">{{ Company_info.comname }}</h1>
                         <span class="subtitle"></span>
                         <!-- $$$qtcore-index.html-description -->
                         <div class="descr">
@@ -134,18 +134,19 @@
     </div>
     <div class="footer">
         <p>
-            <a href="http://www.hllok.com/lianxiwomen.jsp" target="_blank">联系我们</a> |
-            <a href="http://www.hllok.com/index.jsp" target="_blank">常见问题</a> |
-            <a href="http://bbs.hllok.com/forum-4-1.html" target="_blank">意见反馈</a> |
-            <a href="http://www.hllok.com" target="_blank">友情链接</a>
+            <a href="{{ Company_info.address_lxwm }}" target="_blank">联系我们</a> |
+            <a href="{{ Company_info.address_cjwt }}" target="_blank">常见问题</a> |
+            <a href="{{ Company_info.address_yjfk }}" target="_blank">意见反馈</a> |
+            <a href="{{ Company_info.address_yqlj }}" target="_blank">友情链接</a>
         </p>
         <p>
             Copyright © 2008-2020
-            <a href="//www.hllok.com" target="_blank">Hllok.com</a> All Rights Reserved 西安火眼智能检测研究院有限公司
+            <a href="{{ Company_info.address_yqlj }}" target="_blank">{{ Company_info.address_com }}</a> All Rights Reserved {{ Company_info.comname }}
+
         </p>
-        <p>中国(陕西)西安高新区科技路旺座国际城C座1101室</p>
-        <p><a href="http://www.beian.miit.gov.cn/" target="_blank">陕ICP备14009079号-1</a></p>
-        <p><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51019002000701" target="_blank">陕公网安备&nbsp;51019002000701号</a></p>
+        <p>{{ Company_info.address_work }}</p>
+        <p><a href="http://www.beian.miit.gov.cn/" target="_blank">{{ Company_info.record_ICP }}</a></p>
+        <p><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode={{ Company_info.record_sgwa }}" target="_blank">陕公网安备&nbsp;{{ Company_info.record_sgwa }}号</a></p>
     </div>
 </body>
 </html>

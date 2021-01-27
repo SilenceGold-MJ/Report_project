@@ -16,7 +16,7 @@ class Logger(object):
         self.logger.setLevel(logging.DEBUG)
 
         # 创建一个handler，用于写入日志文件
-        rq = time.strftime('%Y%m%d%H%M', time.localtime(time.time()))
+        rq = time.strftime('%Y%m%d', time.localtime(time.time()))#'%Y%m%d%H%M'
         #log_path = os.path.dirname(os.getcwd()) + '/Logs/'  # 项目根目录下/Logs 保存日志
         #log_path = os.path.dirname(os.path.abspath('.')) + '/logs/'
         log_path = os.path.join(os.getcwd() + '/logs/')#liuxn
