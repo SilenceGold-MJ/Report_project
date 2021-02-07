@@ -1,10 +1,12 @@
 
-from pyecharts import options as opts
+
 from pyecharts.charts import Page, Pie
 from pyecharts.charts import Line
 from pyecharts.charts import Bar
+
 from pyecharts import options as opts
 from pyecharts.charts import Liquid
+from pyecharts.commons.utils import JsCode
 
 width='1100px'
 height='500px'
@@ -84,14 +86,15 @@ def Bar_chart_1(dic):#条线
 
         bar.render("./static/html/%s" % dic['htmlname'])
 
-def Bar_chart(dic):#条线
+def Bar_chart(dic):#正常柱形图
     from pyecharts import options as opts
     from pyecharts.charts import Bar
+
 
     bar = (
         Bar(init_opts = opts.InitOpts(width=width,height=height))
             .add_xaxis(dic['key'])
-            .add_yaxis(dic["legend"], dic['values'])
+            .add_yaxis(dic["legend"], dic['values'],category_gap='')
             .set_global_opts(title_opts=opts.TitleOpts(title=dic["titlename"]),
 
                 yaxis_opts=opts.AxisOpts(name="bug数"),
@@ -115,16 +118,25 @@ def Bar_chart(dic):#条线
         # )
     )
     bar.render("./static/html/%s" % dic['htmlname'])
-def Bar_chart_vertical(dic):#条形图竖
+def Bar_chart_vertical(dic):#横柱形图
+    category_gap=''
+    if len(dic['key'])<4:
+        category_gap='80%'
+    #height="{}px".format(len(dic['key'])*43)
+
+
     bar = (
         Bar(init_opts = opts.InitOpts(width=width,height=height))
             .add_xaxis(dic['key'])
-            .add_yaxis(dic["legend"], dic['values'])
-            #.add_yaxis("商家B", Faker.values())
-            .reversal_axis()
-            .set_series_opts(label_opts=opts.LabelOpts(position="right"))
-            .set_global_opts(title_opts=opts.TitleOpts(title=dic["titlename"]))
+            .add_yaxis(dic["legend"], dic['values'],category_gap=category_gap)
+            .reversal_axis()#横柱形图
+            .set_series_opts( label_opts=opts.LabelOpts(position="right",))#横柱形图
+
     )
+    #bar.add_yaxis( dic["legend"], dic['values'],label_opts=opts.LabelOpts(formatter="{c}%"))
+    bar.set_global_opts(title_opts=opts.TitleOpts(title=dic["titlename"]),
+        xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(formatter="{value}%"), interval=10))
+
 
     bar.render("./static/html/%s" % dic['htmlname'])
 
@@ -154,7 +166,7 @@ def Line_chart(dic):#折现图
     line.render_notebook()
     line.render("./static/html/%s" % dic['htmlname'])  # 保存图片为HTML网页
 
-def progress_chart(dic):#进度图
+def progress_chart_01(dic):#进度图
 
 
     c = (
@@ -163,5 +175,26 @@ def progress_chart(dic):#进度图
             .set_global_opts(title_opts=opts.TitleOpts(title=dic["titlename"]))
             .render("./static/html/%s" % dic['htmlname'])
             #.render_embed()
+    )
+    return c
+
+def progress_chart(dic):#进度图
+
+    c = (
+        Liquid(init_opts = opts.InitOpts(width=width,height=height))
+            .add("BUG修复率",[dic['share'], dic['share']],
+
+            label_opts=opts.LabelOpts(
+                font_size=50,
+                formatter=JsCode(
+                    """function (param) {
+                        return (Math.floor(param.value * 10000) / 100) + '%';
+                    }"""
+                ),
+                position="inside",
+            ),
+        )
+            .set_global_opts(title_opts=opts.TitleOpts(title=dic["titlename"]))
+            .render("./static/html/%s" % dic['htmlname'])
     )
     return c

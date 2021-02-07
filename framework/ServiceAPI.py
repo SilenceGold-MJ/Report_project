@@ -147,7 +147,8 @@ class ServiceAPI():
 
                 dic.update({"severity_%s"%i: data})
             logger.info(dic)
-            dic.update({'Repair_rate': round(dic['closed'] / dic['sums'], 4) if dic['sums']!=0 else 0.0})
+            dic.update({'Repair_rate': float('%.2f' % (dic['closed'] / dic['sums']*100)) if dic['sums']!=0 else 0.0})
+
             dic.update({"owner":get_module_info(n)["owner"]})#责任人
             dic.update(status_Rele(dic))
 
@@ -175,6 +176,7 @@ class ServiceAPI():
 
                }
         #dic_srt = json.dumps(dic)
+        logger.info(dic)
         return dic
     def get_product(self):#获取项目信息
         sql ='select * from  zt_product WHERE deleted="0";'
@@ -215,7 +217,7 @@ class ServiceAPI():
                 data_dic.update({"severity_%s"%s:Query_DB().getnum(sql_sum)})
 
 
-            data_dic.update({'Repair_rate': round(data_dic['closed'] / data_dic['sum_all']  if data_dic['sum_all']!=0 else 0.0,4),"PO":get_product_info_(i["id"])["PO"]})
+            data_dic.update({'Repair_rate': float('%.2f' % (data_dic['closed'] / data_dic['sum_all']*100  if data_dic['sum_all']!=0 else 0.0)),"PO":get_product_info_(i["id"])["PO"]})
 
 
             n+=1
@@ -224,7 +226,7 @@ class ServiceAPI():
 
             product_name.append(data_dic['name'])
             product_sum.append(data_dic['sum_all'])
-            Repair_rate.update({i["name"]:round(data_dic['closed'] / data_dic['sum_all'] if data_dic['sum_all']!=0 else 0.0,4)})
+            Repair_rate.update({i["name"]:float('%.2f' % (data_dic['closed'] / data_dic['sum_all']*100 if data_dic['sum_all']!=0 else 0.0))})
 
         Repair_rate=sorted(data, key = lambda i: i['Repair_rate'],reverse=False)#降序
 

@@ -59,9 +59,9 @@ def zentaos_zm():
 
 
 def zentao_list():
-	module_list = ['编号', '模块名称', '总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','修复率','责任人','发布建议','详情']
+	module_list = ['编号', '模块名称', '总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','修复率 /%','责任人','发布建议','详情']
 	bug_list = ['序列', '项目', '模块', 'BUG编号', 'BUG标题', '严重程度', '优先级', 'BUG状态', '创建日期', '指派给', '由谁创建', '详情']
-	pro_list = [ '编号', '项目名称', 'BUG总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','修复率','责任人','发布建议','详情']
+	pro_list = [ '编号', '项目名称', 'BUG总数', '已修复', '未修复', '待验证','致命级','严重级','一般级','轻微级','修复率 /%','责任人','发布建议','详情']
 	return {"module_list": module_list, 'bug_list': bug_list, 'pro_list': pro_list}
 
 def product_lusion(dic):
@@ -170,7 +170,7 @@ def severity():
 
 
 def Repair_threshold():#修复率阀值
-	repair_threshold=0.8  #修复率阀值
+	repair_threshold=80  #修复率阀值
 	return repair_threshold
 def Company_info():
 	cominfo={
