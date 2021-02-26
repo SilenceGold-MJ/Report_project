@@ -118,15 +118,24 @@ def Bar_chart(dic):#正常柱形图
         # )
     )
     bar.render("./static/html/%s" % dic['htmlname'])
+
+
 def Bar_chart_vertical(dic):#横柱形图
+
     category_gap=''
-    if len(dic['key'])<4:
+    projects_Num=len(dic['key'])
+    if projects_Num<4:
         category_gap='80%'
     #height="{}px".format(len(dic['key'])*43)
 
+    if projects_Num>11:
+        heights='%spx'%(500/12*projects_Num)    #height='500px'
+    else:
+        heights =height
+
 
     bar = (
-        Bar(init_opts = opts.InitOpts(width=width,height=height))
+        Bar(init_opts = opts.InitOpts(width=width,height=heights))
             .add_xaxis(dic['key'])
             .add_yaxis(dic["legend"], dic['values'],category_gap=category_gap)
             .reversal_axis()#横柱形图
