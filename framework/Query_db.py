@@ -16,10 +16,15 @@ port=database()['port']
 class Query_DB():#查询个数
     def getnum(self,sql):
         # 打开数据库连接
-        db = pymysql.connect(host, user, password, DB)
-        # 使用cursor()方法获取操作游标
-        cursor = db.cursor()
-        # SQL 查询语句
+
+        try:
+            db = pymysql.connect(host=host, user=user, password=password, database=DB)
+            # 使用cursor()方法获取操作游标
+            cursor = db.cursor()
+            # cursor = db.cursor(MySQLdb.cursors.DictCursor)
+
+        except Exception as e:
+            logger.error("可能是连接数据库失败（%s）"%str(e))
         try:
             # 执行SQL语句
             #logger.info(sql)
@@ -41,11 +46,14 @@ class Query_DB():#查询个数
 
         # 打开数据库连接
 
-        db = pymysql.connect(host, user, password, DB)
-        # 使用cursor()方法获取操作游标
-        cursor = db.cursor()
-        #cursor = db.cursor(MySQLdb.cursors.DictCursor)
+        try:
+            db = pymysql.connect(host=host, user=user, password=password, database=DB)
+            # 使用cursor()方法获取操作游标
+            cursor = db.cursor()
+            # cursor = db.cursor(MySQLdb.cursors.DictCursor)
 
+        except Exception as e:
+            logger.error("可能是连接数据库失败（%s）"%str(e))
         try:
             # 执行SQL语句
             # sql = "SELECT * FROM %s"%table_name
@@ -68,11 +76,15 @@ class Query_DB():#查询个数
 
     def query_db_rowlist(self,sql,row):  # 查询表中某一个行数据列表+除重
         # 打开数据库连接
-        db = pymysql.connect(host, user, password, DB)
-        # 使用cursor()方法获取操作游标
-        cursor = db.cursor()
-        #cursor = db.cursor(MySQLdb.cursors.DictCursor)
 
+        try:
+            db = pymysql.connect(host=host, user=user, password=password, database=DB)
+            # 使用cursor()方法获取操作游标
+            cursor = db.cursor()
+            # cursor = db.cursor(MySQLdb.cursors.DictCursor)
+
+        except Exception as e:
+            logger.error("可能是连接数据库失败（%s）"%str(e))
         try:
             # 执行SQL语句
             # sql = "SELECT * FROM %s"%table_name

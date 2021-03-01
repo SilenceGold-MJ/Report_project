@@ -119,9 +119,9 @@ def module_Next_step(dic):
 	return lusion
 def database():#禅道数据库地址
 	dic={
-		"host":"192.168.1.55",#127.0.0.1"
+		"host":"192.168.1.55",#127.0.0.1"#http://140.143.38.4/ 192.168.1.55
 		'user':'root',
-		'password' : "hl123456",
+		'password' : "hl123456",#"hl123456",123456
 		'DB':'zentao',
 		'port':3306
 	}
@@ -129,7 +129,7 @@ def database():#禅道数据库地址
 
 def zentao_Addr():#禅道地址
 	dic={
-		"host":"192.168.1.55",
+		"host":"192.168.1.55",#140.143.38.4   #192.168.1.55
 		'port':81
 
 	}
