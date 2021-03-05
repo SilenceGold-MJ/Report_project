@@ -37,6 +37,7 @@
                     <table class="buildversion">
                         <tr>
                             <td id="buildversion" width="100%" align="right"><a href="{{ head_addr }}">首页</a></td>
+{#                            <td id="buildversion" width="100%" align="right"><a href="{{ head_addr }}">首页</a></td>#}
                         </tr>
                     </table>
                 </div>
@@ -49,10 +50,11 @@
                                 <h3><a name="toc">目录</a></h3>
                                 <ul>
                                     <li class="level1"><a href="#functiondetection_summary">1.	项目简报</a></li>
-									<li class="level1"><a href="#functiondetection_summary_2">2.	模块统计</a></li>
-                                    <li class="level1"><a href="#functiondetection_summary_3">3.	项目BUG等级占比</a></li>
-                                    <li class="level1"><a href="#functiondetection_summary_4">4.	最近七日增量</a></li>
-                                    <li class="level1"><a href="#functiondetection_summary_5">5.	全周期BUG日增量</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_2">2.	今日新增</a></li>
+									<li class="level1"><a href="#functiondetection_summary_3">3.	模块统计</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_4">4.	项目BUG等级占比</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_5">5.	最近七日增量</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_6">6.	全周期BUG日增量</a></li>
 
 
 
@@ -128,10 +130,40 @@
 
                          </ul>
 
+                            <h2 id="functiondetection_summary_2">2.	今日新增</h2>
+
+                            <ul>
+
+                            <li class="level1"><p>{{ zentao_zm }}</p></li>
+
+                                                                <table class=table11_6>
+  <tr>
+      {% for key in entry_name_lies_BUGlist %}
+        <th>{{ key }}</th>
+        {% endfor %}
+      {% for key in operation %}
+        <th>{{ key }}</th>
+        {% endfor %}
+  </tr>
+  <tr>
+              {% for i in day_increase_bug_list.data %}
+			<tr>
+            {% for key,value in i.items %}
+                <td>{{ value }}</td>
+                             {% endfor %}
+{#             <td><a href="/{{path_url}}?module={{ i.module }}&Modulename={{ i.Modulename }}">详情</a></td>#}
+            <td><a href="http://{{ day_increase_bug_list.zentao_url }}/zentao/bug-view-{{ i.id }}.html">详情</a></td>
+
+                </tr>
+
+    {% endfor %}
+  </tr>
+
+</table>
+                            </ul>
 
 
-
-                            <h2 id="functiondetection_summary_2">2.	模块统计</h2>
+                            <h2 id="functiondetection_summary_3">3.	模块统计</h2>
                             <ul>
 {#                                                    <li class="level1"><p></p></li>#}
 
@@ -165,7 +197,7 @@
 
                             </ul>
 
-                                                    <h2 id="functiondetection_summary_3">3.	项目BUG等级占比</h2>
+                                                    <h2 id="functiondetection_summary_4">4.	项目BUG等级占比</h2>
                             <ul>
 
 {#								<li class="level1"><a href="/static/SouthWaterToNorth_Dynamics.html">模拟动态采集图像测试报告-2020/11/02</a></li>#}
@@ -175,7 +207,7 @@
 
                             </ul>
 
-                            <h2 id="functiondetection_summary_4">4.	最近七日增量</h2>
+                            <h2 id="functiondetection_summary_5">5.	最近七日增量</h2>
                             <ul>
 
 {#								<li class="level1"><a href="/static/SouthWaterToNorth_Dynamics.html">模拟动态采集图像测试报告-2020/11/02</a></li>#}
@@ -184,7 +216,7 @@
 
 
                             </ul>
-                            <h2 id="functiondetection_summary_5">5.	全周期BUG日增量</h2>
+                            <h2 id="functiondetection_summary_6">6.	全周期BUG日增量</h2>
                             <ul>
 
                                  <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{dic_all_bug_data}}" width="100%" height="530" >    </object>

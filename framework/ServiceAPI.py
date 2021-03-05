@@ -574,3 +574,73 @@ class ServiceAPI():
                     }
         #dic_srt = json.dumps(dic_data)
         return dic_data
+    def get_day_increase_list(self,dic):#获取日增BUg列表
+        ""
+        # dic={
+        #     "module":'',
+        #     'product':'',
+        #     'StartTime':'',
+        #     'End_Time':'',
+        # }
+        # StartTime_srt = '%s 00:00:00'%(dic['StartTime'])
+        # End_Time_srt= '%s 23:59:59'%(dic['End_Time'])
+        zentao_host =zentao_Addr()['host']
+        zentao_port =zentao_Addr()['port']
+
+        if dic['module'] == "" and dic['product'] != '':
+            sql_ = "SELECT * FROM zt_bug WHERE product = %s AND deleted = '0' AND openedDate BETWEEN '%s' AND '%s' ORDER BY severity ASC,pri ASC;" % (dic['product'], dic['StartTime'], dic['End_Time'])
+
+        elif  dic['module'] != "" and dic['product'] == '':
+            sql_ = "SELECT * FROM zt_bug WHERE module = %s AND deleted = '0' AND openedDate BETWEEN '%s' AND '%s' ORDER BY severity ASC,pri ASC;" % (
+            dic['module'], dic['StartTime'], dic['End_Time'])
+
+
+
+        elif dic['module'] != "" and dic['product'] != '':
+            sql_ = "SELECT * FROM zt_bug WHERE product = %s AND module = %s AND deleted = '0' AND openedDate BETWEEN '%s' AND '%s' ORDER BY severity ASC,pri ASC;" % (
+            dic['product'],dic['module'], dic['StartTime'], dic['End_Time'])
+        elif dic['module'] == "" and dic['product'] == '':
+            # sql_ = "SELECT * FROM zt_bug WHERE product = %s AND module = %s AND deleted = '0' AND openedDate BETWEEN '%s' AND '%s' ORDER BY severity ASC,pri ASC;" % (
+            # dic['product'],dic['module'], dic['StartTime'], dic['End_Time'])
+            sql_=''
+
+        data_list=Query_DB().query_db_all(sql_)
+        datas=[]
+        config=configs()
+        n=1
+        for data in data_list:
+
+            dic = {
+                "xulie":n,
+                "product":get_product_info(data['product']),
+                "module":get_module_info(data['module'])['module'],
+                'id': data['id'],
+                'title': data['title'],
+                'severity': config['severity'][str(data['severity'])],
+                'pri': config['pri'][str(data['pri'])],
+                'status': config['status'][data['status']],
+                'openedDate': data['openedDate'],
+                'assignedTo': ServiceAPI(). get_user(data['assignedTo']),
+                'openedBy': ServiceAPI(). get_user(data['openedBy']),
+
+            }
+            n+=1
+            datas.append(dic)
+        datas_dic={'message': '操作成功', 'result_code': '0000', 'data': datas,'zentao_url':"%s:%s"%(zentao_host,zentao_port)}
+        import json
+        import datetime
+
+        class DateEncoder(json.JSONEncoder):
+            def default(self, obj):
+                if isinstance(obj, datetime.datetime):
+                    return obj.strftime('%Y-%m-%d %H:%M:%S')
+                elif isinstance(obj, data):
+                    return obj.strftime("%Y-%m-%d")
+                else:
+                    return json.JSONEncoder.default(self, obj)
+
+
+        #datas_str=json.dumps(datas_dic, cls=DateEncoder)
+        return (datas_dic)
+
+

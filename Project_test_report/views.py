@@ -124,12 +124,25 @@ def project_summary(request):#
 
                 if len(Importance_level_data["data"]) != 0:
                     Importance_level_data_list.append(Importance_level_data)
+            logger.info(Importance_level_data_list )
             return Importance_level_data_list
 
 
 
 
     ###########################################################获取严重级别以上BUG列表
+    ###########################################################获取日增BUG列表
+    now=time.strftime("%Y-%m-%d", time.localtime())
+    dic_day_increase_list={
+
+    'StartTime':'%s 00:00:00'%now,
+    'End_Time':'%s 23:59:59'%now,
+    }
+    dic_day_increase_list.update(dic)
+    logger.info('dic_day_increase_list:%s'%dic_day_increase_list)
+    day_increase_bug_list=ServiceAPI().get_day_increase_list(dic_day_increase_list)
+    logger.info("day_increase_bug_list:%s"%str(day_increase_bug_list))
+    ###########################################################获取日增BUG列表
 
     ##############################################简介语
 
@@ -314,7 +327,8 @@ def project_summary(request):#
                       'severity_all_html': severity_all_dic['htmlname'],
                       'severity_NOclosed_1_2_sum':severity_NOclosed_1_2_sum,
                       'progress_chart_html':dic_progress_chart['htmlname'],
-                      'All_product_vertical': dic_All_product_vertical['htmlname']
+                      'All_product_vertical': dic_All_product_vertical['htmlname'],
+                      'day_increase_bug_list':day_increase_bug_list
 
                   }
                   )
@@ -359,7 +373,18 @@ def module(request):
         return Importance_level_data
 
     ###########################################################获取严重级别以上BUG列表
+    ###########################################################获取日增BUG列表
+    now=time.strftime("%Y-%m-%d", time.localtime())
+    dic_day_increase_list={
 
+    'StartTime':'%s 00:00:00'%now,
+    'End_Time':'%s 23:59:59'%now,
+    }
+    dic_day_increase_list.update(dic)
+    logger.info('dic_day_increase_list:%s'%dic_day_increase_list)
+    day_increase_bug_list=ServiceAPI().get_day_increase_list(dic_day_increase_list)
+    logger.info("day_increase_bug_list:%s"%str(day_increase_bug_list))
+    ###########################################################获取日增BUG列表
     ##############################################简介语
 
     #data_product_module_sum = API().APIall('get_product_module_sum', dic)["data"]
@@ -525,7 +550,8 @@ def module(request):
                       'dic_txt_BUG_rz_data': dic_txt_BUG_rz_data['htmlname'],
                       'dic_all_bug_data': dic_all_bug_data['htmlname'],
                       'product':product,
-                      'progress_chart_html': dic_progress_chart['htmlname']
+                      'progress_chart_html': dic_progress_chart['htmlname'],
+                        'day_increase_bug_list': day_increase_bug_list
 
                   }
 

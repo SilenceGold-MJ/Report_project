@@ -50,10 +50,11 @@
                                 <ul>
 
                                     <li class="level1"><a href="#functiondetection_summary_1">1.	模块简报</a></li>
-                                    <li class="level1"><a href="#functiondetection_summary_2">2.	未关闭BUG列表</a></li>
-                                    <li class="level1"><a href="#functiondetection_summary_3">3.	所有BUG等级占比</a></li>
-                                    <li class="level1"><a href="#functiondetection_summary_4">4.	最近七日增量</a></li>
-                                    <li class="level1"><a href="#functiondetection_summary_5">5.	全周期BUG日增量</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_2">2.	今日新增</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_3">3.	未关闭BUG列表</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_4">4.	所有BUG等级占比</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_5">5.	最近七日增量</a></li>
+                                    <li class="level1"><a href="#functiondetection_summary_6">6.	全周期BUG日增量</a></li>
 
 
                                 </ul>
@@ -113,8 +114,39 @@
 
 
                          </ul>
+                            <h2 id="functiondetection_summary_2">2.	今日新增</h2>
 
-                            <h2 id="functiondetection_summary_2">2.	未关闭BUG列表</h2>
+                            <ul>
+
+                            <li class="level1"><p>{{ zentao_zm }}</p></li>
+
+                                                                <table class=table11_6>
+  <tr>
+      {% for key in entry_name_lies %}
+        <th>{{ key }}</th>
+        {% endfor %}
+      {% for key in operation %}
+        <th>{{ key }}</th>
+        {% endfor %}
+  </tr>
+  <tr>
+              {% for i in day_increase_bug_list.data %}
+			<tr>
+            {% for key,value in i.items %}
+                <td>{{ value }}</td>
+                             {% endfor %}
+{#             <td><a href="/{{path_url}}?module={{ i.module }}&Modulename={{ i.Modulename }}">详情</a></td>#}
+            <td><a href="http://{{ day_increase_bug_list.zentao_url }}/zentao/bug-view-{{ i.id }}.html">详情</a></td>
+
+                </tr>
+
+    {% endfor %}
+  </tr>
+
+</table>
+                            </ul>
+
+                            <h2 id="functiondetection_summary_3">3.	未关闭BUG列表</h2>
 
                             <ul>
 
@@ -146,20 +178,20 @@
 </table>
                             </ul>
 
-                            <h2 id="functiondetection_summary_3">3.	所有BUG等级占比</h2>
+                            <h2 id="functiondetection_summary_4">4.	所有BUG等级占比</h2>
 
                             <ul>
                   <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{severity_all_html}}" width="100%" height="530" >    </object>
                                 </ul>
 
 
-                          <h2 id="functiondetection_summary_4">4.	最近七日增量</h2>
+                          <h2 id="functiondetection_summary_5">5.	最近七日增量</h2>
 
 
                             <ul>
                    <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{dic_txt_BUG_rz_data}}" width="100%" height="530" >    </object>
                                 </ul>
-                        <h2 id="functiondetection_summary_5">5.	全周期BUG日增量</h2>
+                        <h2 id="functiondetection_summary_6">6.	全周期BUG日增量</h2>
                             <ul>
 
                                  <object style="border:0px"  type="text/x-scriptlet" data="../static/html/{{dic_all_bug_data}}" width="100%" height="530" >    </object>
